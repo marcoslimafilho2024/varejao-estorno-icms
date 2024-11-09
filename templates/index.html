@@ -1,0 +1,26 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <title>Estorno do ICMS</title>
+</head>
+<body>
+    <h1>Estorno do ICMS - Estado do Ceará</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label>Selecione o arquivo (xls ou xlsx):</label>
+        <input type="file" name="file" required>
+        <button type="submit">Calcular</button>
+    </form>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if valicm_total %}
+        <h2>Resultados:</h2>
+        <p>VALICM TOTAL: {{ valicm_total }}</p>
+        <p>VALOR ESTORNADO: {{ valor_estornado }}</p>
+        <p>VALOR LÍQUIDO: {{ valor_liquido }}</p>
+        <a href="{{ url_for('download_pdf', valicm_total=valicm_total, valor_estornado=valor_estornado, valor_liquido=valor_liquido) }}">Baixar Memória de Cálculo em PDF</a>
+    {% endif %}
+</body>
+</html>
